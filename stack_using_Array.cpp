@@ -75,6 +75,14 @@ int peek(class stack *ptr, int position)
         return ptr->arr[ArrayIndex];
     }
 }
+int stackTop(class stack *ptr)
+{
+    return ptr->arr[ptr->top];
+}
+int staclBottom(class stack *ptr)
+{
+    return ptr->arr[0];
+}
 int main()
 { //Declaration of a Stack of array without using pointers.
     // class stack s ;
