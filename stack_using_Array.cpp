@@ -79,7 +79,7 @@ int stackTop(class stack *ptr)
 {
     return ptr->arr[ptr->top];
 }
-int staclBottom(class stack *ptr)
+int stackBottom(class stack *ptr)
 {
     return ptr->arr[0];
 }
@@ -111,9 +111,11 @@ int main()
     push(s, 5);
     push(s, 75);
 
+    printf("The top most value of this stack is %d\n", stackTop(s));
+    printf("The bottom most value of this stack is %d\n", stackBottom(s));
     //testing peek function
-    for (int j = 1; j <= s->top + 1; j++)
-    {
-        printf("The value at position %d is %d\n", j, peek(s, j));
-    }
+    // for (int j = 1; j <= s->top + 1; j++)
+    // {
+    //     printf("The value at position %d is %d\n", j, peek(s, j));
+    // }
 }
