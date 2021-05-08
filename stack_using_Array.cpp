@@ -33,51 +33,79 @@ int IsFull(class stack *ptr)
     }
 }
 
-int push(class stack *s , int value){
-    if(IsFull){
-        cout<<"Stack overflow"<<endl;
+int push(class stack *s, int value)
+{
+    if (IsFull(s))
+    {
+        cout << "Stack overflow" << endl;
         return -1;
-    }else{
-        s-> top++ ;
-        s->arr[s->top] = value ;
-        return 0; 
     }
-    
+    else
+    {
+        s->top = s->top + 1;
+        s->arr[s->top] = value;
+        return 0;
+    }
 }
-int pop(class stack *s){
-    if(IsEmpty){
-        cout<<"Stack underflow"<<endl;
+int pop(class stack *s)
+{
+    if (IsEmpty(s))
+    {
+        cout << "Stack underflow" << endl;
         return -1;
-    }else{
-        int value = s->arr[s->top];
-        s->top = s->top - 1 ; 
-        return value ;
     }
-    
+    else
+    {
+        int value = s->arr[s->top];
+        s->top = s->top - 1;
+        return value;
+    }
+}
+
+int peek(class stack *ptr, int position)
+{
+    int ArrayIndex = ptr->top - position + 1;
+    if (ArrayIndex < 0)
+    {
+        cout << "Not a valid position for the stack \n";
+        return -1;
+    }
+    else
+    {
+        return ptr->arr[ArrayIndex];
+    }
 }
 int main()
-{
+{ //Declaration of a Stack of array without using pointers.
     // class stack s ;
     // s.size = 80 ;
     // s.top = -1 ;
     // s.arr = (int *)malloc(size * sizeof(int));
 
+    //Declaration of a Stack of array using pointers.
     class stack *s;
-    
     s = (class stack *)malloc(sizeof(class stack));
-    s->size = 80;
+    s->size = 50;
     s->top = -1;
     s->arr = (int *)malloc(s->size * sizeof(int));
-    
-    s->arr[0] = 40 ;
-    s->top++;
-    //checking is stack is empty or full 
-    if (IsEmpty(s))
+
+    //pushing some elements in stack
+    push(s, 21);
+    push(s, 23);
+    push(s, 99);
+    push(s, 75);
+    push(s, 3);
+    push(s, 64);
+    push(s, 57);
+    push(s, 46);
+    push(s, 89);
+    push(s, 6);
+    push(s, 5);
+    push(s, 75);
+
+    //testing peek function
+    for (int j = 1; j <= s->top + 1; j++)
     {
-        cout<<"The stack is empty";
+        printf("The value at position %d is %d\n", j, peek(s, j));
     }
-    else {
-        cout<<"The stack is not empty";
-    }
-    return 0;
-}  
+}
