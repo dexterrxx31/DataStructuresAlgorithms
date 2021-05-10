@@ -45,7 +45,7 @@ class Node *push(class Node *ptr, int value)
         newNode->data = value;
         newNode->next = ptr;
         ptr = newNode;
-        return ptr;
+        return ;
     }
 }
 void linkedListTraversal(class Node *ptr)
