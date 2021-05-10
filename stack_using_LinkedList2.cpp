@@ -56,12 +56,18 @@ void linkedListTraversal(class Node *ptr)
         ptr = ptr->next;
     }
 }
-void peek(class Node* ptr)
-{
+void peek(class Node* ptr , int position)
+{   int counter = 1 ;
     while(ptr != NULL)
-    {
-        cout<<"Element is :"<<ptr->data<<endl;
+    {   
+        if (counter == position)
+        {
+            cout<<"Element is :"<<ptr->data<<endl;
+            break ;
+        }
+        counter++ ;
         ptr = ptr->next;
+
     }
 }
 void top_of_stack(class Node* ptr)
@@ -108,8 +114,8 @@ int main()
     // printf("Popped element is %d\n", element);
     // linkedListTraversal(top);
     
-    //peek(top);
+    peek(top , 2);
     //top_of_stack(top);
-    bottom_of_stack(top);
+    //bottom_of_stack(top);
     return 0;
 }
