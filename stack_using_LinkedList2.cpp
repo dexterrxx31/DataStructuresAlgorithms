@@ -33,9 +33,9 @@ int isFull(class Node *ptr)
         return 0;
     }
 }
-class Node *push(class Node *top, int value)
+class Node *push(class Node *ptr, int value)
 {
-    if (isFull(top))
+    if (isFull(ptr))
     {
         cout << "Stack Overflow" << endl;
     }
@@ -43,9 +43,9 @@ class Node *push(class Node *top, int value)
     {
         class Node *newNode = (class Node *)malloc(sizeof(class Node));
         newNode->data = value;
-        newNode->next = top;
-        top = newNode;
-        return top;
+        newNode->next = ptr;
+        ptr = newNode;
+        return ptr;
     }
 }
 void linkedListTraversal(class Node *ptr)
