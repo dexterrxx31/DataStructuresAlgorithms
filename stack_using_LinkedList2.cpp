@@ -48,11 +48,19 @@ class Node *push(class Node *top, int value)
         return top;
     }
 }
-void linkedListTraversal(struct Node *ptr)
+void linkedListTraversal(class Node *ptr)
 {
     while (ptr != NULL)
     {
         printf("Element: %d\n", ptr->data);
+        ptr = ptr->next;
+    }
+}
+void peek(class Node* ptr)
+{
+    while(ptr != NULL)
+    {
+        cout<<"Element is :"<<ptr->data<<endl;
         ptr = ptr->next;
     }
 }
@@ -78,10 +86,11 @@ int main()
     top = push(top, 7);
     top = push(top, 8);
 
-    linkedListTraversal(top);
-    int element = pop(top);
-    printf("Popped element is %d\n", element);
-    linkedListTraversal(top);
-
+    // linkedListTraversal(top);
+    // int element = pop(top);
+    // printf("Popped element is %d\n", element);
+    // linkedListTraversal(top);
+    
+    peek(top);
     return 0;
 }
