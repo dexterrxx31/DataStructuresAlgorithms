@@ -1,4 +1,4 @@
-#include <iostream>
+#include<iostream>
 using namespace std;
 
 class Node
@@ -64,6 +64,23 @@ void peek(class Node* ptr)
         ptr = ptr->next;
     }
 }
+void top_of_stack(class Node* ptr)
+{
+    cout<<"Top element is :"<<ptr->data<<endl;
+}
+void bottom_of_stack(class Node* ptr)
+{
+    while (ptr != NULL)
+    {
+        if (ptr->next == NULL)
+        {
+            cout<<"Bottom element is :"<<ptr->data<<endl;
+        }
+        ptr = ptr->next;
+        
+    }
+    
+}
 int pop(class Node *tp)
 {
     if (isEmpty(tp))
@@ -91,6 +108,8 @@ int main()
     // printf("Popped element is %d\n", element);
     // linkedListTraversal(top);
     
-    peek(top);
+    //peek(top);
+    //top_of_stack(top);
+    bottom_of_stack(top);
     return 0;
 }
