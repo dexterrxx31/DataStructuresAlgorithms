@@ -12,7 +12,7 @@ public:
 };
 int isFull(class Node *ptr)
 {
-    if (ptr->top == ptr->size)
+    if (ptr->top == ptr->size - 1)
     {
         return 1;
     }
@@ -42,14 +42,15 @@ void push(class Node *ptr, char value)
     else
     {
         ptr->top++;
-        ptr->arr[ptr -> top] = value;
+        ptr->arr[ptr->top] = value;
     }
 }
 char pop(class Node *ptr)
 {
-    if (isFull(ptr))
+    if (isEmpty(ptr))
     {
         cout << "Stack Underflow!";
+        return -1;
     }
     else
     {
@@ -68,7 +69,7 @@ char pop(class Node *ptr)
 //     }
 // }
 
-int parenthesisMatching(char *expression)
+int parenthesisMatching(const char *expression)
 {
     class Node *sp = (class Node *)malloc(sizeof(class Node));
     sp->size = 20;
@@ -90,10 +91,18 @@ int parenthesisMatching(char *expression)
             pop(sp);
         }
     }
+    if (isEmpty(sp))
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
 }
 int main()
 {
-    const char * expression = "((8)(*--$$9))";
+    const char *expression = "((8)(*--$$9))";
 
     if (parenthesisMatching(expression))
     {
