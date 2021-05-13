@@ -6,8 +6,9 @@ using namespace std;
 class Node
 {
 public:
-    char data;
-    class Node *next;
+    int size ;
+    int top ;
+    class *arr;
 };
 
 class Node *top = NULL;
@@ -46,33 +47,8 @@ void Traversal(class Node *ptr)
 }
 int main()
 {
-    char const *arr = "1(3+2)(+67+)";
+   char * expression = "((1+2)(*---$$)))";
 
-    for (int i = 0; arr[i] != '\0'; i++)
-    {
-        if (arr[i] == '(' || ')')
-        {
-            if (arr[i] == '(')
-            {
-                top = push(top, arr[i]);
-                Traversal(top);
-            }
-            else
-            {
-                if (isEmpty(top))
-                {
-                    cout << "Parenthesis Mismatch";
-                    break;
-                }
-                pop(top);
-                Traversal(top);
-            }
-        }
-    }
-    Traversal(top);
-    if (top == NULL)
-    {
-        cout << "Parenthesis Matched";
-    }
+   
     return 0;
 }
