@@ -11,10 +11,12 @@ example :-    a        b         +
 */
 
 #include <iostream>
+#include <string.h>
 using namespace std;
 
 class stack
 {
+public:
     int top;
     int size;
     char *arr;
@@ -44,11 +46,11 @@ int isFull(class stack *sp)
     }
 }
 
-int push(class stack *sp, char element)
+void push(class stack *sp, char element)
 {
     if (isFull(sp))
     {
-        return -1;
+        cout<<"Stack OverFlow"<<endl;
     }
     else
     {
@@ -57,10 +59,11 @@ int push(class stack *sp, char element)
     }
 }
 
-char pop(class stack *sp)
+char pop(class stack* sp)
 {
     if (isEmpty(sp))
     {
+        cout << "Stack UnderFlow" << endl;
         return -1;
     }
     else
@@ -71,7 +74,7 @@ char pop(class stack *sp)
     }
 }
 
-char stack_top(class stack *sp)
+char stack_top(class stack* sp)
 {
     return sp->arr[sp->top];
 }
@@ -94,7 +97,7 @@ int isOperator(char ch)
         return 0;
 }
 
-char *infix_to_postfix(char *expression)
+const char *infix_to_postfix(const char *expression)
 {
     class stack *sp = (class stack *)malloc(sizeof(class stack));
     sp->top = -1;
@@ -103,14 +106,39 @@ char *infix_to_postfix(char *expression)
     char *pos = (char *)malloc((strlen(expression) + 1) * sizeof(char));
     int i = 0;
     int j = 0;
-    while(expression[i]!='\0')
+    while (expression[i] != '\0')
     {
-        
+        if (!isOperator(expression[i]))
+        {
+            pos[j] = expression[i];
+            j++;
+            i++;
+        }
+        else
+        {
+            if (precedence(expression[i]) > precedence(stack_top(sp)))
+            {
+                push(sp, expression[i]);
+                i++;
+            }
+            else
+            {
+                pos[j] = pop(sp);
+                j++;
+            }
+        }
     }
+    while (!isEmpty(sp))
+    {
+        pos[j] = pop(sp);
+        j++;
+    }
+    pos[j] = '\0';
+    return pos;
 }
 int main()
 {
-    const char *expression = "";
+    const char *expression = "x-y/z-k*d";
     const char *postfix = infix_to_postfix(expression);
     cout << "Infix : " << expression << endl;
     cout << "Postfix : " << postfix << endl;
