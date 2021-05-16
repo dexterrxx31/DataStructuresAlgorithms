@@ -58,14 +58,18 @@ char pop(class Node *ptr)
     }
 }
 
-// void Traversal(class Node *ptr)
-// {
-//     while (ptr != NULL)
-//     {
-//         cout << ptr->data << endl;
-//         ptr = ptr->next;
-//     }
-// }
+int matched(char a, char b){
+    if(a=='{' && b=='}'){
+        return 1;
+    }
+    if(a=='(' && b==')'){
+        return 1;
+    }
+    if(a=='[' && b==']'){
+        return 1;
+    }
+  return 0;  
+}
 
 int parenthesisMatching(const char *expression)
 {
@@ -76,17 +80,21 @@ int parenthesisMatching(const char *expression)
 
     for (int i = 0; expression[i] != '\0'; i++)
     {
-        if (expression[i] == '(')
+        if (expression[i] == '(' || expression[i] == '{' || expression[i] == '[' )
         {
-            push(sp, '(');
+            push(sp, expression[i]);
         }
-        else if (expression[i] == ')')
+        else if (expression[i] == ')' || expression[i] == '}' || expression[i] == ']' )
         {
             if (isEmpty(sp))
             {
                 return 0;
             }
-            pop(sp);
+            char popped_element =  pop(sp);
+            if(!matched(popped_element , expression[i]))
+            {
+                return 0 ;
+            }
         }
     }
     if (isEmpty(sp))
