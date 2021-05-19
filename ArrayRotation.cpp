@@ -1,7 +1,8 @@
 #include <iostream>
 #include <vector>
 using namespace std;
-
+//Interview Bit
+//https://www.interviewbit.com/problems/arraybug/
 vector<int> rotateArray(vector<int> &A, int B)
 {
     vector<int> ret;
