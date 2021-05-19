@@ -4,35 +4,87 @@ Degree of node: No of direct children.
 Degree of tree : highest degree of a node among all the nodes present in the tree.
 Binary tree : Tree of degree two.
 */
-#include<iostream>
+#include <iostream>
 using namespace std;
 
-class Node {
-    public:
+class Node
+{
+public:
     int data;
-    class Node* left ;
-    class Node* right ;
+    class Node *left;
+    class Node *right;
 };
 
-class Node* create_Node (int data)
+class Node *create_Node(int data)
 {
-    class Node* newNode = (class Node*)malloc(sizeof(class Node));
-    newNode->data = data ;
+    class Node *newNode = (class Node *)malloc(sizeof(class Node));
+    newNode->data = data;
     newNode->left = NULL;
-    newNode->right = NULL ;
+    newNode->right = NULL;
     return newNode;
 }
+/*                  1       (ROOT)
+                2       3   
+              left    right
+
+Three types of Traversal in Binary Tress .
+    PreOrder     - Root/Left/Right
+    postOrder    - Left/Right/Root
+    inOrder      - left/Root/Right
+
+*/
+
+void preOrder(class Node *ptr)
+{
+    if (ptr != NULL)
+    {
+        cout << ptr->data << "||";
+        preOrder(ptr->left);
+        preOrder(ptr->right);
+    }
+}
+
+void postOrder(class Node *ptr)
+{
+    if (ptr != NULL)
+    {
+        postOrder(ptr->left);
+        postOrder(ptr->right);
+        cout << ptr->data << "||";
+    }
+}
+
+void inOrder(class Node *ptr)
+{
+    if (ptr != NULL)
+    {
+        inOrder(ptr->left);
+        cout << ptr->data << "||";
+        inOrder(ptr->right);
+    }
+}
+
 int main()
-{   
-    class Node * p = create_Node(1);
-    class Node * p1 = create_Node(2);
-    class Node * p2 = create_Node(3);
-    //class Node * p3 = create_Node(4);
-    //class Node * p4 = create_Node(5);
+{
+    class Node *p = create_Node(1);
+    class Node *p1 = create_Node(2);
+    class Node *p2 = create_Node(3);
+    class Node *p3 = create_Node(4);
+    class Node *p4 = create_Node(5);
+    class Node *p5 = create_Node(6);
+    class Node *p6 = create_Node(7);
+    //Linking Nodes to form a tree
 
-    //Linking Nodes to form a tree 
-
-    p->left = p1 ;
-    p->right = p2 ;
-    return 0 ;
+    p->left = p1;
+    p->right = p2;
+    p1->left = p3;
+    p1->right = p4;
+    p2->left = p5;
+    p2->right = p6;
+    preOrder(p);
+    cout << endl;
+    postOrder(p);
+    cout << endl;
+    inOrder(p);
+    return 0;
 }
