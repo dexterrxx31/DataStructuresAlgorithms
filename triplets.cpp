@@ -6,46 +6,34 @@ using namespace std;
 //Line 1 -- Array of int
 //Line 2 -- Targeted sum
 
-int binary_search(vector<int> arr, int element)
-{
-    int begin = 0;
-    int end = arr.size();
-    while (begin <= end)
-    {
-        int mid = begin + (end - begin) / 2;
-        if (arr[mid] == element)
-        {
-            return 1;
-        }
-        if (arr[mid] < element)
-        {
-            begin = mid + 1;
-        }
-
-        if (arr[mid] > element)
-
-        {
-            end = mid - 1;
-        }
-    }
-    return 0;
-}
-
 vector<int> pairs(vector<int> arr, int target_sum)
 {
-    vector<int> result;
+    vector<vector<int>> result;
+    int left_pointer = 1;
+    int right_pointer = arr.size();
+    int c = 0;
     for (int i = 0; i < arr.size(); i++)
     {
-        int required_number = target_sum - arr[i];
-        if (arr[i] == required_number)
+        int required_sum = target_sum - arr[i];
+        while (left_pointer < right_pointer)
         {
-            continue;
-        }
-        if (binary_search(arr, required_number) == 1)
-        {
-            result.push_back(arr[i]);
-            result.push_back(required_number);
-            return result;
+            if (arr[left_pointer] + arr[right_pointer] == required_sum)
+            {
+                result[c][0] = arr[i];
+                result[c][1] = arr[left_pointer];
+                result[c][3] = arr[right_pointer];
+                right_pointer--;
+                left_pointer++;
+                c++;
+            }
+            if (arr[left_pointer] + arr[right_pointer] >= required_sum)
+            {
+                right_pointer--;
+            }
+            if (arr[left_pointer] + arr[right_pointer] >= required_sum)
+            {
+                left_pointer++;
+            }
         }
     }
 }
@@ -57,13 +45,24 @@ void vector_traversal(vector<int> arr)
     }
     cout << endl;
 }
+void vector_traversal_2d(vector<vector<int>> arr)
+{
+    for (int i = 0; i < arr.size(); i++)
+    {
+        for (int j = 0; j < arr[0].size(); j++)
+        {
+            cout << "|" << arr[i][j] << "|";
+        }
+        cout << endl;
+    }
+    cout << endl;
+}
 int main()
 {
-    vector<int> arr = {10, 5, 2, 3, -6, 9, 11};
+    vector<int> arr = {4, 5, 2, 7, 3, 6, 15, 9, 1, 8};
     sort(arr.begin(), arr.end());
     vector_traversal(arr);
-    int target_sum = 4;
+    int target_sum = 18;
     vector<int> result = pairs(arr, target_sum);
-    cout << result[0] << "||" << result[1];
     return 0;
 }
