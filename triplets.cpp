@@ -6,36 +6,34 @@ using namespace std;
 //Line 1 -- Array of int
 //Line 2 -- Targeted sum
 
-vector<int> pairs(vector<int> arr, int target_sum)
+vector<vector<int>> pairs(vector<int> arr, int target_sum)
 {
     vector<vector<int>> result;
-    int left_pointer = 1;
-    int right_pointer = arr.size();
-    int c = 0;
-    for (int i = 0; i < arr.size(); i++)
+    for (int i = 0; i <= arr.size() - 3; i++)
     {
-        int required_sum = target_sum - arr[i];
+        int left_pointer = i + 1;
+        int right_pointer = arr.size() - 1;
         while (left_pointer < right_pointer)
-        {
-            if (arr[left_pointer] + arr[right_pointer] == required_sum)
+        {   int current_sum = arr[i];
+            current_sum+=arr[left_pointer];
+            current_sum+=arr[right_pointer];
+            if (current_sum== target_sum)
             {
-                result[c][0] = arr[i];
-                result[c][1] = arr[left_pointer];
-                result[c][3] = arr[right_pointer];
+                result.push_back({arr[i],arr[left_pointer],arr[right_pointer]});
                 right_pointer--;
                 left_pointer++;
-                c++;
             }
-            if (arr[left_pointer] + arr[right_pointer] >= required_sum)
+            if (current_sum > target_sum)
             {
                 right_pointer--;
             }
-            if (arr[left_pointer] + arr[right_pointer] >= required_sum)
+            else
             {
                 left_pointer++;
             }
         }
     }
+    return result ;
 }
 void vector_traversal(vector<int> arr)
 {
@@ -47,7 +45,7 @@ void vector_traversal(vector<int> arr)
 }
 void vector_traversal_2d(vector<vector<int>> arr)
 {
-    for (int i = 0; i < arr.size(); i++)
+    for (int i = 0; i < arr.size() ; i++)
     {
         for (int j = 0; j < arr[0].size(); j++)
         {
@@ -63,6 +61,9 @@ int main()
     sort(arr.begin(), arr.end());
     vector_traversal(arr);
     int target_sum = 18;
-    vector<int> result = pairs(arr, target_sum);
+    vector<vector <int>> result = pairs(arr, target_sum);
+    cout<<result.size();
+    cout<<endl;
+    vector_traversal_2d(result);
     return 0;
 }
