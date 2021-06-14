@@ -4,7 +4,7 @@
 using namespace std;
 
 //Line 1 -- Array of int
-//Line 2 -- Targeted sum
+//Line 2 -- Targeted sum of triplets
 
 vector<vector<int>> pairs(vector<int> arr, int target_sum)
 {
