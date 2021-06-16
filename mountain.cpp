@@ -25,10 +25,30 @@ void vector_traversal(vector<int> arr)
     }
     cout << endl;
 }
+int length_of_peak(vector<int> arr , int peak )
+{
+    int counter = 1 ;
+    int i = peak ;
+    int j = peak ;
+    while( arr[i-1] <= arr[i] )
+    {
+        counter++ ;
+        i-- ;
+    }
+    while( arr[j+1] <= arr[j] )
+    { 
+        counter++ ;
+        j++ ;
+    }
+    return counter;
+}
+
 int main()
 {
-    vector<int> arr = {5,6,1,2,3,5,4,3,2,0,1,2,3,-2,4};
+    vector<int> arr = {5,6,1,2,3,4,5,4,3,2,0,1,2,3,-2,4};
     vector<int> peaks = peaks_of_mountain(arr);
     vector_traversal(peaks);
+    int length = length_of_peak(arr , 6);
+    cout<<endl<<length ;
     return 0 ;
 }
