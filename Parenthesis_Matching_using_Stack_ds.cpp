@@ -99,7 +99,7 @@ int parenthesisMatching(const char *expression)
     }
 }
 int main()
-{   // it is necessary to have const char pointer else code will not work as per as c++
+{   
     const char *expression = "((8)(*--$$9))";
 
     if (parenthesisMatching(expression))
