@@ -10,19 +10,24 @@ void swap(int arr[], int n, int m)
     arr[m] = temp;
 }
 
-// void heapify(int arr[] , int size , int i )
-// {
-//     int parent =( i - 1 ) / 2; 
-//     if (arr[parent] > 0)
-//     {
-//         if(arr[i] > arr[parent])
-//         {
-//             swap(arr,i,parent);
-//             heapify(arr , size , parent);
-//         }
-//     }
-// }
+void heapify (int arr[] , int n ,int i)
+{   
+    int largest = i ; // Initialize largest as a root
+    int left_child = 2*i ;
+    int right_child = 2*i + 1 ;
 
+    if(left_child < n && arr[left_child] > arr[largest])
+        largest = left_child ;
+    
+    if(right_child < n && arr[right_child] > arr[largest])
+        largest = right_child ;
+    
+    if(largest != i)
+    {
+        swap(arr , i , largest);
+        heapify(arr , n ,largest);
+    }
+}
 
 void insert_element(int A[] , int n )
 {
@@ -75,19 +80,27 @@ void heap_sort(int arr[] , int n )
         delete_element(arr , i );
     }
 }
+
 int main()
 {
-    //An Array forming Max Heap
+    //Initialising Arrays for creating Heaps
     int H[] = {0,10,20,30,25,5,40,35}; 
+    int arr[] = {0,5,10,30,20,35,40,15};
 
-    for(int i = 2; i<=7 ; i++)
-        insert_element(H,i);
+    //Creating Heap using Basic Method
+    // for(int i = 2; i<=7 ; i++)
+    //     insert_element(H,i);
+
+    //Creating Heap using Heapify method
+    for(int i = 3 ; i > 0 ; i--)
+        heapify(H , 8 , i);
 
     //cout<<delete_element(H,7)<<endl;
-    heap_sort(H , 7);
+    //heap_sort(H , 7);
+
+    //Printing All elements of Heap 
     for (int j = 0; j <= 7; j++)
-        cout<<H[j]<<" ";
-    
-    
+        cout<<H[j]<<" ";   
+
     return 0;
 }
