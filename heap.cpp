@@ -1,16 +1,14 @@
 #include <iostream>
 using namespace std;
 
-//#define MAX 1000 //Max size of heap
-
 //Swap elements in an array by index
-// void swap(int arr[], int n, int m)
-// {
-//     int temp;
-//     temp = arr[n];
-//     arr[n] = arr[m];
-//     arr[m] = temp;
-// }
+void swap(int arr[], int n, int m)
+{
+    int temp;
+    temp = arr[n];
+    arr[n] = arr[m];
+    arr[m] = temp;
+}
 
 // void heapify(int arr[] , int size , int i )
 // {
@@ -25,13 +23,6 @@ using namespace std;
 //     }
 // }
 
-// //Function for insertion of element in max heap
-// void insert_element(int arr[], int size ,int element)
-// {
-//     size++;
-//     arr[size-1] = element ;
-//     heapify(arr,size ,size - 1);
-// }
 
 void insert_element(int A[] , int n )
 {
@@ -48,12 +39,11 @@ void insert_element(int A[] , int n )
 
 int delete_element(int A[] , int n )
 {
-    int i , j ,temp , val ;
+    int i , j ,deleted_element ;
 
     //Swaping Root element and last leaf
-    val = A[1];
-    A[1] = A[n];
-    A[n] = val ;
+    deleted_element = A[1];
+    swap(A , 1 , n );
 
     //setting parent and child 
     i = 1 ; j = i*2;
@@ -65,10 +55,8 @@ int delete_element(int A[] , int n )
         if(A[i] <A[j])
         {   
             //Swap parent and Child
-            temp = A[i];
-            A[i] = A[j];
-            A[j] = temp;
-            
+            swap(A , i , j );
+    
             //Updating child element as parent and  initialing j to its child
             i = j ;
             j = 2*j ;
@@ -77,7 +65,7 @@ int delete_element(int A[] , int n )
             break;      // If parent is greater than child then its time to stop the loop
     }
     //returning the deleted value 
-    return val;
+    return deleted_element;
 }
 
 void heap_sort(int arr[] , int n )
