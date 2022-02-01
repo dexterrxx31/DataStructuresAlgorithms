@@ -55,7 +55,7 @@ void running_sum_approch(int arr[], int size)
     cout << max_sum;
 }
 
-//Kadane's Algorithm
+//Kadane's Algorithm in O(n)
 void kadanes_algo(int arr[], int size)
 {
     int max_sum = INT_MIN;
@@ -63,9 +63,7 @@ void kadanes_algo(int arr[], int size)
 
     for (int i = 0; i < size; i++)
     {
-        current_sum = current_sum + arr[i];
-        if (current_sum < 0)
-            current_sum = 0;
+        current_sum = max(arr[i] , current_sum + arr[i]);
         max_sum = max(max_sum, current_sum);
     }
     cout << max_sum;
