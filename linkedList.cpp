@@ -52,13 +52,14 @@ class Node* delete_ele_beg(class Node* head)
 void delete_ele_end(class Node* head)
 {
     class Node *newNode = new Node ;
-    //newNode = head ;
-    while (head->next != NULL)
-    {
-        /* code */
+    while ((*head).next ->next != NULL)
+    {   
+        head = head->next ;
     }
     
-    delete newNode; 
+    newNode = head->next ;
+    head->next = NULL ;
+    delete newNode ;
 }
 
 int main()
@@ -82,7 +83,8 @@ int main()
     traversalOfElements(head);
     // head = insert_ele_at_begining(11 , head);
     cout<<endl;
-    head = delete_ele_beg(head);
+    //head = delete_ele_beg(head);
+    delete_ele_end(head);
     traversalOfElements(head);
     return 0;
 }
