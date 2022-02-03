@@ -56,9 +56,23 @@ void delete_ele_end(class Node* head)
     {   
         head = head->next ;
     }
-    
+
     newNode = head->next ;
     head->next = NULL ;
+    delete newNode ;
+}
+
+void delete_any_ele_data(class Node* head , int ele)
+{
+    class Node *newNode = new Node ;
+    while (head->data == ele)
+    {   
+        head = head->next ;
+    }
+
+    newNode = head->next ;
+    head->next = newNode->next ;
+    newNode->next = NULL;
     delete newNode ;
 }
 
@@ -84,7 +98,7 @@ int main()
     // head = insert_ele_at_begining(11 , head);
     cout<<endl;
     //head = delete_ele_beg(head);
-    delete_ele_end(head);
+    delete_any_ele_data(head , 8);
     traversalOfElements(head);
     return 0;
 }
