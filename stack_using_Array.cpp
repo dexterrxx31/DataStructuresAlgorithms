@@ -1,8 +1,7 @@
-#include <iostream>
-#include <stdlib.h> //used for Malloc
+#include <bits/stdc++.h>
 using namespace std;
 
-class stack
+struct stk
 {
 public:
     int size;
@@ -10,64 +9,57 @@ public:
     int *arr;
 };
 
-int IsEmpty(class stack *ptr)
+int IsEmpty(stk *ptr)
 {
     if (ptr->top == -1)
-    {
         return 1;
-    }
     else
-    {
         return 0;
-    }
 }
-int IsFull(class stack *ptr)
+
+int IsFull(stk *ptr)
 {
-    if (ptr->top == ptr->size - 1)
-    {
+    if (ptr->top == ptr->size)
         return 1;
+    else
+        return 0;
+}
+
+void push(stk *ptr, int value)
+{
+    if (IsFull(ptr))
+    {
+        cout << "Stack overflow" << endl;
+        return;
     }
     else
     {
-        return 0;
+        ptr->top++;
+        ptr->arr[ptr->top] = value;
     }
 }
 
-int push(class stack *s, int value)
+int void pop(stk *ptr)
 {
-    if (IsFull(s))
-    {
-        cout << "Stack overflow" << endl;
-        return -1;
-    }
-    else
-    {
-        s->top = s->top + 1;
-        s->arr[s->top] = value;
-        return 0;
-    }
-}
-int pop(class stack *s)
-{
-    if (IsEmpty(s))
+    if (IsEmpty(ptr))
     {
         cout << "Stack underflow" << endl;
         return -1;
     }
     else
     {
-        int value = s->arr[s->top];
-        s->top = s->top - 1;
+        int value = ptr->arr[ptr->top];
+        ptr->top--;
         return value;
     }
 }
 
-int peek(class stack *ptr, int position)
+int peek(class stk *ptr, int position)
 {
     int ArrayIndex = ptr->top - position + 1;
     if (ArrayIndex < 0)
     {
-        cout << "Not a valid position for the stack \n";
+        cout << "Not a valid position for the stk \n";
         return -1;
     }
     else
@@ -75,44 +67,43 @@ int peek(class stack *ptr, int position)
         return ptr->arr[ArrayIndex];
     }
 }
-int stackTop(class stack *ptr)
+
+int stackTop(class stk *ptr)
 {
     return ptr->arr[ptr->top];
 }
-int stackBottom(class stack *ptr)
+
+int stackBottom(class stk *ptr)
 {
     return ptr->arr[0];
 }
+
 int main()
 { //Declaration of a Stack of array without using pointers.
-    // class stack s ;
+    // class stk s ;
     // s.size = 80 ;
     // s.top = -1 ;
     // s.arr = (int *)malloc(size * sizeof(int));
 
     //Declaration of a Stack of array using pointers.
-    class stack *s;
-    s = (class stack *)malloc(sizeof(class stack));
-    s->size = 50;
-    s->top = -1;
-    s->arr = (int *)malloc(s->size * sizeof(int));
+    stk *s = new stk;
+    //s = (class stk *)malloc(sizeof(class stk));
+    s->size = 20;
+    s->top = -1; //initially keeping stk top as -1
+    //s->arr = (int *)malloc(s->size * sizeof(int));
+    s->arr = new int[s->size];
 
-    //pushing some elements in stack
-    push(s, 21);
-    push(s, 23);
-    push(s, 99);
-    push(s, 75);
-    push(s, 3);
-    push(s, 64);
-    push(s, 57);
-    push(s, 46);
-    push(s, 89);
-    push(s, 6);
-    push(s, 5);
-    push(s, 75);
+    //taking one input arr for pushing some value
+    int input_arr[] = {1, 2, 3, 4, 5, 6, 7, 7, 8, 9, 10};
+    int n = sizeof(input_arr) / sizeof(input_arr[0]); //size of input array
 
-    printf("The top most value of this stack is %d\n", stackTop(s));
-    printf("The bottom most value of this stack is %d\n", stackBottom(s));
+    for (int i = 0; i < n; i++)
+    {
+        push(s, input_arr[i]); //pushing values in array
+    }
+
+    printf("The top most value of this stk is %d\n", stackTop(s));
+    printf("The bottom most value of this stk is %d\n", stackBottom(s));
     //testing peek function
     // for (int j = 1; j <= s->top + 1; j++)
     // {
