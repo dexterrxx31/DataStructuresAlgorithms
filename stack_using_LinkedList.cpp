@@ -5,57 +5,51 @@ class Node
 {
 public:
     int data;
-    class Node *next;
+    Node *next;
 };
-int isEmpty(class Node *ptr)
+
+int isEmpty(Node *ptr)
 {
     if (ptr == NULL)
-    {
-        //cout<<"Stack is Full";
         return 1;
-    }
     else
-    {
         return 0;
-    }
 }
-int isFull(class Node *ptr)
+
+int isFull()
 {
-    class Node *newNode = (class Node *)malloc(sizeof(class Node));
+    Node *newNode = (class Node *)malloc(sizeof(class Node));
     if (newNode == NULL)
-    {
-        //cout<<"Stack is Full";
         return 1;
-    }
     else
-    {
         return 0;
-    }
 }
-class Node *push(class Node *top, int value)
+
+Node *push(Node *top, int value)
 {
-    if (isFull(top))
-    {
+    if (isFull())
         cout << "Stack Overflow" << endl;
-    }
     else
     {
-        class Node *newNode = (class Node *)malloc(sizeof(class Node));
+        //class Node *newNode = (class Node *)malloc(sizeof(class Node));
+        Node *newNode = new Node;
         newNode->data = value;
         newNode->next = top;
         top = newNode;
         return top;
     }
 }
-void linkedListTraversal(struct Node *ptr)
+
+void linkedListTraversal(Node *ptr)
 {
-    while (ptr != NULL)
+    while (ptr)
     {
-        printf("Element: %d\n", ptr->data);
+        cout << ptr->data << " ";
         ptr = ptr->next;
     }
 }
-int pop(class Node **top)
+
+int pop(Node **top)
 {
     if (isEmpty(*top))
     {
@@ -64,24 +58,29 @@ int pop(class Node **top)
     }
     else
     {
-        class Node *temp = *top;
+        Node *temp = *top;
         *top = (*top)->next;
         int data = temp->data;
-        free(temp);
+        delete temp;
         return data;
     }
 }
+
 int main()
 {
-    class Node *top = NULL;
-    top = push(top, 78);
-    top = push(top, 7);
-    top = push(top, 8);
+    Node *top = NULL;
+    //taking an input array for push operation
+    int arr[] = {1, 3, 4, 5, 6, 6, 7, 8};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    for (int i = 0; i < n; i++)
+        top = push(top, arr[i]);
 
     linkedListTraversal(top);
+    cout << endl;
+
     int element = pop(&top);
     printf("Popped element is %d\n", element);
     linkedListTraversal(top);
-
     return 0;
 }
