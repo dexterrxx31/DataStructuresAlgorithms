@@ -59,13 +59,33 @@ Node *improved_linear_seach(Node *head, int ele)
     }
 }
 
+//Deleting Dublicats from sorted linked list
+void dub_delete(Node *head)
+{
+    Node *p = head;
+    Node *q = p->next;
+    while (q)
+    {
+        if (p->data != q->data)
+        {
+            p = q;
+            q = q->next;
+        }
+        else
+        {
+            p->next = q->next;
+            delete q;
+            q = p->next;
+        }
+    }
+}
 int main()
 {
     Node *head = new Node; //head Node pointer of linked list
     head->data = 0;
     head->next = NULL;
-    int arr[] = {1, 2, 3, 4, 5, 6, 7, 8, 9}; //taking array for input in linked list
-    int n = sizeof(arr) / sizeof(arr[0]);    //size of array
+    int arr[] = {1, 2, 2, 2, 2, 2, 3, 4, 5, 2, 2, 6, 7, 8, 9}; //taking array for input in linked list
+    int n = sizeof(arr) / sizeof(arr[0]);                      //size of array
 
     for (int i = 0; i < n; i++)
     {
@@ -74,7 +94,8 @@ int main()
 
     traversalOfElements(head);
     cout << endl;
-    head = improved_linear_seach(head, 5);
+    //head = improved_linear_seach(head, 5);
+    dub_delete(head);
     cout << endl;
     traversalOfElements(head);
     return 0;
