@@ -79,6 +79,24 @@ void dub_delete(Node *head)
         }
     }
 }
+
+//Here we are reversing links
+Node *reversing_linked_list(Node *head)
+{
+    Node *p = head;
+    Node *q = NULL;
+    Node *r = NULL;
+    //r->next = NULL;
+    while (p != NULL)
+    {
+        r = q;
+        q = p;
+        p = p->next;
+        q->next = r;
+    }
+    return q;
+}
+
 int main()
 {
     Node *head = new Node; //head Node pointer of linked list
@@ -95,7 +113,8 @@ int main()
     traversalOfElements(head);
     cout << endl;
     //head = improved_linear_seach(head, 5);
-    dub_delete(head);
+    //dub_delete(head);
+    head = reversing_linked_list(head);
     cout << endl;
     traversalOfElements(head);
     return 0;
