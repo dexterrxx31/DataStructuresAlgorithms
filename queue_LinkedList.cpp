@@ -16,15 +16,15 @@ int isFull()
         return 0;
 }
 
-int isEmpty(Node *front, Node *rear)
+int isEmpty(Node *front)
 {
-    if (front == rear)
+    if (front == NULL)
         return 1;
     else
         return 0;
 }
 
-Node *enqueue(Node *rear, int val)
+void *enqueue(Node **front, Node **rear, int val)
 {
     if (isFull())
         cout << "Queue is Full" << endl;
@@ -33,27 +33,32 @@ Node *enqueue(Node *rear, int val)
         Node *newNode = new Node;
         newNode->data = val;
         newNode->next = NULL;
-        rear->next = newNode;
-        return newNode;
+        if (*front == NULL)
+            *front = *rear = newNode;
+        else
+        {
+            (*rear)->next = newNode;
+            *rear = newNode;
+        }
     }
 }
 
-// int dequeue(Node **front , Node **rear)
-// {
-//     if (isEmpty(front , rear))
-//         cout << "Node is Empty" << endl;
-//     else
-//     {
-//         ptr->front++;
-//         int deleted_item = ptr->arr[ptr->front];
-//         ptr->arr[ptr->front] = 0;
-//         return deleted_item;
-//     }
-// }
+int dequeue(Node **front)
+{
+    if (isEmpty(*front))
+        cout << "Node is Empty" << endl;
+    else
+    {
+        Node *newNode = *front;
+        int deleted_item = newNode->data;
+        *front = (*front)->next;
+        delete newNode;
+        return deleted_item;
+    }
+}
 
 void traversal(Node *front)
 {
-    front = front->next;
     while (front)
     {
         cout << front->data << " ";
@@ -64,19 +69,21 @@ void traversal(Node *front)
 int main()
 {
     Node *Que = new Node;
-    Node *front = Que;
-    Node *rear = Que;
-    front->next = NULL;
-    rear->next = NULL;
+    Node *front = NULL;
+    Node *rear = NULL;
 
     int input_arr[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
     int n = sizeof(input_arr) / sizeof(input_arr[0]);
 
     for (int i = 0; i < n; i++)
     {
-        rear = enqueue(rear, input_arr[i]);
+        enqueue(&front, &rear, input_arr[i]);
     }
 
     traversal(front);
+
+    cout << endl << "Deleted Element " << dequeue(&front) << endl;
+    traversal(front);
+
     return 0;
 }
