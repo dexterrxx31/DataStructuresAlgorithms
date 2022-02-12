@@ -30,7 +30,9 @@ int main()
             {
                 sum = sum - arr[i];
                 i++;
-            }
+                if (sum == k)
+                    max_sum = max(max_sum, j - i + 1);
+            }    
             j++;
         }
     }
