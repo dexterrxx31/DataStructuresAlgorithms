@@ -3,13 +3,12 @@ using namespace std;
 
 int main()
 {
-    string input_string = "aabacbebebe"; // input string
-    int n = input_string.size();         // size of string (given)
-    int unique_char = 3;                 // unique characters required in window
-    unordered_map<char, int> mp;         // map data structure to keep track of unique characters
-    int max_window_size = INT_MIN;       // max window varible to keep track of longest window size
-    int i, j;                            // pointers to mark end and start of window
-    i = j = 0;                           // intital value of pointers
+    string input_string = "pwwkew"; // input string
+    int n = input_string.size();    // size of string (given)
+    unordered_map<char, int> mp;    // map data structure to keep track of unique characters
+    int max_window_size = INT_MIN;  // max window varible to keep track of longest window size
+    int i, j;                       // pointers to mark end and start of window
+    i = j = 0;                      // intital value of pointers
 
     // Sliding window Loop
     while (j < n)
