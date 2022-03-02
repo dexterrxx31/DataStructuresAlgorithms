@@ -4,7 +4,7 @@
 using namespace std;
 
 // Brute force Approch O(n2)
-void nextGreatestElement(vector<int> arr)
+void nextGreatestElementWithoutStack(vector<int> arr)
 {
     int n = arr.size();
     for (int i = 0; i < n; i++)
@@ -26,9 +26,37 @@ void nextGreatestElement(vector<int> arr)
     }
 }
 
+// Using Stack data structure
+vector<int> NGEWithStack(vector<int> arr)
+{
+    int n = arr.size();
+    stack<int> st;
+    vector<int> ans;
+    for (int i = n - 1; i >= 0; i--)
+    {
+        if (!st.empty())
+        {
+            while (!st.empty() && st.top() <= arr[i])
+            {
+                st.pop();
+            }
+        }
+        st.empty() ? ans.push_back(-1) : ans.push_back(st.top());
+        st.push(arr[i]);
+    }
+    reverse(ans.begin(), ans.end());
+    return ans;
+}
+
 int main()
 {
     vector<int> arr{11, 13, 21, 3};
-    nextGreatestElement(arr);
+    // nextGreatestElementWithoutStack(arr);
+    vector<int> answer = NGEWithStack(arr);
+    for (int i = 0; i < answer.size(); i++)
+    {
+        cout << answer[i] << " ";
+    }
+
     return 0;
 }
