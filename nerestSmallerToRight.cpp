@@ -9,7 +9,7 @@ vector<int> NGEWithStack(vector<int> arr)
     int n = arr.size();
     stack<int> st;
     vector<int> ans;
-    for (int i = 0; i < n; i++)
+    for (int i = n - 1 ; i >= 0; i--)
     {
         if (!st.empty())
         {
@@ -21,6 +21,7 @@ vector<int> NGEWithStack(vector<int> arr)
         st.empty() ? ans.push_back(-1) : ans.push_back(st.top());
         st.push(arr[i]);
     }
+    reverse(ans.begin(), ans.end());
     return ans;
 }
 
