@@ -42,18 +42,6 @@ vector<int> nearestSmallerLeft(vector<int> arr)
     int n = arr.size();
     stack<pair<int, int>> st;
     vector<int> ans;
-    // for (int i = 0; i < n; i++)
-    // {
-    //     if (!st.empty())
-    //     {
-    //         while (!st.empty() && st.top() >= arr[i])
-    //         {
-    //             st.pop();
-    //         }
-    //     }
-    //     st.empty() ? ans.push_back(-1) : ans.push_back(st.top());
-    //     st.push(arr[i]);
-    // }
     for (int i = 0; i < n; i++)
     {
         if (st.size() == 0)
