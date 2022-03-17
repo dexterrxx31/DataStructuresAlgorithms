@@ -26,13 +26,18 @@ int max_to_right(vector<int> arr, int index)
 
 int total_water_trapped(vector<int> arr)
 {
-    
+    int water = 0;
+    for (int i = 0; i < arr.size(); i++)
+    {
+        int height_of_water = min(max_to_left(arr, i), max_to_right(arr, i));
+        water += height_of_water - arr[i];
+    }
+    return water;
 }
 int main()
 {
     vector<int> arr{3, 0, 0, 2, 0, 4};
     int n = arr.size();
-    cout << max_to_left(arr, 1) << endl
-         << max_to_right(arr, 1);
+    cout << total_water_trapped(arr);
     return 0;
 }
