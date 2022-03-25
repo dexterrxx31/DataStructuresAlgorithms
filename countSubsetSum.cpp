@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int subsetSum(int arr[], int sum, int n)
+int CountSubsetSum(int arr[], int sum, int n)
 {
     int t[n + 1][sum + 1];
 
@@ -29,6 +29,6 @@ int main()
     int arr[] = {1, 2, 3, 3};
     int sum = 6;
     int n = sizeof(arr) / sizeof(arr[0]);
-    cout << subsetSum(arr, sum, n);
+    cout << CountSubsetSum(arr, sum, n);
     return 0;
 }
