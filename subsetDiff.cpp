@@ -1,4 +1,4 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
 
 int CountSubsetSum(int arr[], int sum, int n)
@@ -24,11 +24,22 @@ int CountSubsetSum(int arr[], int sum, int n)
     return t[n][sum];
 }
 
+int subsetDiff(int arr[] , int n  , int diff)
+{   int sum = 0 ; 
+    for (size_t i = 0; i < n; i++)
+    {
+        sum+=arr[i];
+    }
+    int req_sum = ( sum + diff )/2 ;
+    return CountSubsetSum(arr , req_sum , n );
+    
+}
+
 int main()
 {
-    int arr[] = {1, 2, 3, 3};
-    int sum = 3;
-    int n = sizeof(arr) / sizeof(arr[0]);
-    cout << CountSubsetSum(arr, sum, n);
-    return 0;
+    int arr[] = {1,1,2,3};
+    int n  = sizeof(arr)/sizeof(arr[0]);
+    int diff = 1 ;
+    cout<<subsetDiff(arr , n , diff) ;
+    return 0 ;
 }
