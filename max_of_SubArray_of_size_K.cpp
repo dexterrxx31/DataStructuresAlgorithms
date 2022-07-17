@@ -39,3 +39,46 @@ int main()
 
     return 0;
 }
+
+/*
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<int> fxn(vector<int> arr, int n, int k)
+{
+    vector<int> answer;
+    list<int> ls;
+    int i = 0, j = 0;
+
+    while (j < n)
+    {
+        while (arr[j] > ls.front() && ls.size() > 0)
+            ls.pop_back();
+
+        ls.push_back(arr[j]);
+
+        if (j - i + 1 < k)
+            j++;
+        else
+        {
+            answer.push_back(ls.front());
+            if (arr[i] == ls.front())
+                ls.pop_front();
+            i++;
+            j++;
+        }
+    }
+    return answer;
+}
+
+int main()
+{
+    vector<int> arr{1, 3, -1, -3, 5, 3, 6, 7}; // input String
+    int n = arr.size();                        // size of input Array
+    int k = 3;                                 // size of window
+    vector<int> ans = fxn(arr, n, k);
+    for (int i = 0; i < ans.size(); i++)
+        cout << ans[i] << " ";
+    return 0;
+}
+*/
