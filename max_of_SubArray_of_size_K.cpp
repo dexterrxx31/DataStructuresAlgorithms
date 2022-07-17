@@ -4,7 +4,7 @@ using namespace std;
 int main()
 {
     vector<int> arr{1, 3, -1, -3, 5, 3, 6, 7}; // input String
-    int n = arr.size();   // size of input Array
+    int n = arr.size();                        // size of input Array
     list<int> ls;
     vector<int> ans; // vector to store answer string
     int k = 3;       // size of window
@@ -16,7 +16,7 @@ int main()
     while (j < n)
     {
         // Initial Calculation Step
-        while (arr[j] > ls.front() && ls.size() > 0)
+        while (arr[j] > ls.back() && ls.size() > 0)
             ls.pop_back();
 
         ls.push_back(arr[j]);
