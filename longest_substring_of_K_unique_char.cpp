@@ -43,3 +43,54 @@ int main()
     cout << max_window_size;
     return 0;
 }
+
+/*
+#include <bits/stdc++.h>
+using namespace std;
+
+int longest_substring(string str, int n, int k)
+{
+    int mx = 0;
+    int i = 0, j = 0;
+    unordered_map<char, int> mp;
+    int counter = 0;
+
+    while (j < n)
+    {
+        mp[str[j]]++;
+
+        if (mp.size() < k)
+        {
+            j++;
+        }
+        else if (mp.size() == k)
+        {
+            mx = max(mx, j - i + 1);
+            j++;
+        }
+        else if (mp.size() > k)
+        {
+            while (mp.size() > k)
+            {
+                mp[str[i]]--;
+                if (mp[str[i]] == 0)
+                {
+                    mp.erase(str[i]);
+                }
+                i++;
+                if (mp.size() == k)
+                    mx = max(mx, j - i + 1);
+            }
+            j++;
+        }
+    }
+    return mx;
+}
+int main()
+{
+    string input_string = "aabacbebebe"; // input string
+    int n = input_string.size();         // size of string (given)
+    int k = 3;                           // unique characters required in window
+    cout << longest_substring(input_string, n, k);
+}
+*/
