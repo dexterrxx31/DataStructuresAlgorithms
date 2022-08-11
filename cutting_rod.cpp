@@ -1,14 +1,19 @@
 #include<bits/stdc++.h>
 using namespace std ;
 
+//Top Down Approch
+vector<vector<int>> t(9 , vector<int>(9 , -1)) ;
+
 int rod(int W ,int n , vector<int> prices , vector<int> length )
 {
     if(n == 0 || W == 0 ) return 0 ; 
 
+    if(t[n][W] != -1) return t[n][W] ;
+
     if(length[n - 1 ] <= W)
-    return max(prices[n-1] + rod(W-length[n-1] , n-1 , prices , length) , rod(W , n-1 , prices , length));
+    return t[n][W] = max(prices[n-1] + rod(W-length[n-1] , n-1 , prices , length) , rod(W , n-1 , prices , length));
     else if(length[n-1] > W)
-    return  rod(W , n-1 , prices , length);
+    return  t[n][W] = rod(W , n-1 , prices , length);
     return -1 ;
 }
 
